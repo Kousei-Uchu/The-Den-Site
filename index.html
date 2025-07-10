@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Den</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary: #8B5CF6;
+            --secondary: #F59E0B;
+            --accent: #EC4899;
+            --dark: #1F2937;
+            --light: #F3F4F6;
+        }
+        
+        body {
+            font-family: 'Baloo 2', cursive;
+            background-color: #111827;
+            color: var(--light);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .paw-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd' opacity='0.1'%3E%3Cg fill='%23EC4899' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .discord-btn {
+            background: #5865F2;
+            transition: all 0.3s ease;
+        }
+        
+        .discord-btn:hover {
+            background: #4752C4;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="paw-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-gray-900 bg-opacity-80 backdrop-blur-md sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-paw text-purple-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold gradient-text">The Den</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#features" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="#rules" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Rules</a>
+                        <a href="#join" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Join Us</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">About</a>
+                <a href="#features" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Features</a>
+                <a href="#rules" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Rules</a>
+                <a href="#join" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Join Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+            <div class="relative z-10 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 fade-in">
+                    Welcome to <span class="gradient-text">The Den</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 fade-in">
+                    A cozy community for furs to chat, chill, and make friends. We'd love to have you join us!
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in">
+                    <a href="#join" class="px-8 py-3 rounded-full discord-btn text-white font-bold text-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center">
+                        <i class="fab fa-discord mr-2 text-xl"></i> Join The Chaos
+                    </a>
+                    <a href="#about" class="px-8 py-3 rounded-full bg-gray-700 hover:bg-gray-600 text-white font-bold text-lg shadow-lg hover:shadow-xl transition duration-300">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-purple-500 opacity-20 blur-3xl"></div>
+            <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-pink-500 opacity-20 blur-3xl"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800 bg-opacity-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">About The Den</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    A welcoming space for furries of all walks of life to express themselves, share their passions, and connect with potential new friends.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg hover:shadow-purple-500/20 transition duration-300 card-hover">
+                    <div class="text-purple-400 text-4xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Community</h3>
+                    <p class="text-gray-300">
+                        Join our friendly, active community. Founded in 2024, we're a safe space for everyfur. We have daily questions, weekly events, and special activities to make sure there's always something to look forward to! Our members range from artists and writers to gamers and fursuiters.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg hover:shadow-yellow-500/20 transition duration-300 card-hover">
+                    <div class="text-yellow-400 text-4xl mb-4">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Creativity</h3>
+                    <p class="text-gray-300">
+                        Showcase your art, writing, or fursuits in our dedicated channels. We have #art-showcase, #writing-corner for stories and poetry, and #fursuit-friday for suiters. Get friendly feedback from other members and participate in the event canvases.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg hover:shadow-pink-500/20 transition duration-300 card-hover">
+                    <div class="text-pink-400 text-4xl mb-4">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Inclusivity</h3>
+                    <p class="text-gray-300">
+                        We welcome furries of all backgrounds, diagnoses, identities, and experience levels. Our mod team ensures a safe and welcoming space for everyone.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Server Things</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Discover what you can do in The Den special with our cool stuff.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg border-l-4 border-purple-500">
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400">
+                        <i class="fas fa-gamepad mr-2"></i> Gaming Nights
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        We host game nights whenever we remember, cause we have lives (crazy right) and we forget sometimes. We play a whole range of games!
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">Minecraft</span>
+                        <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">Among Us</span>
+                        <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">Webfishing</span>
+                        <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">VR Chat</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg border-l-4 border-yellow-500">
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-400">
+                        <i class="fas fa-palette mr-2"></i> Art Showcase
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Dedicated channels for sharing your artwork, getting constructive feedback, and advertising commissions.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-50 rounded-full text-sm">Digital Art</span>
+                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-50 rounded-full text-sm">Traditional</span>
+                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-50 rounded-full text-sm">Fursuits</span>
+                        <span class="px-3 py-1 bg-yellow-900 bg-opacity-50 rounded-full text-sm">Commissions</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg border-l-4 border-pink-500">
+                    <h3 class="text-2xl font-bold mb-4 text-pink-400">
+                        <i class="fas fa-microphone-alt mr-2"></i> Voice Channels
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Hang out in our voice channels with other goobers. Be silly, be unhinged, or be a goooood boy >:3
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-pink-900 bg-opacity-50 rounded-full text-sm">General VC</span>
+                        <span class="px-3 py-1 bg-pink-900 bg-opacity-50 rounded-full text-sm">Gaming</span>
+                        <span class="px-3 py-1 bg-pink-900 bg-opacity-50 rounded-full text-sm">SFW Roleplay</span>
+                        <span class="px-3 py-1 bg-pink-900 bg-opacity-50 rounded-full text-sm">AFK Lounge</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-400">
+                        <i class="fas fa-calendar-alt mr-2"></i> Events
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Semi-regular events including large VCs, art streams, game nights, and special holiday celebrations.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-50 rounded-full text-sm">Game</span>
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-50 rounded-full text-sm">Art Streams</span>
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-50 rounded-full text-sm">XL VCs</span>
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-50 rounded-full text-sm">Holidays</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">What Members Say</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        
+                        <img class="w-12 h-12 rounded-full mr-4" src="https://cdn.discordapp.com/avatars/616354877299490838/21aab465b3d73dd983d50dbf69603fbc.webp?size=240" />
+                        <div>
+                            <h4 class="font-bold">Imp</h4>
+                            <p class="text-sm text-gray-400">Member since Oct 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"I also joined this server because I don't really have a social circle irl. This place has really helped me expand my horizons. Absolutely hoping it'll do the same for you."</p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold mr-4">SF</div>
+                        <div>
+                            <h4 class="font-bold">SilverFox</h4>
+                            <p class="text-sm text-gray-400">Member since 2020</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"I've made lifelong friends here. The gaming nights are my favorite - always full of laughter and good vibes."</p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center text-white font-bold mr-4">RB</div>
+                        <div>
+                            <h4 class="font-bold">RustyBear</h4>
+                            <p class="text-sm text-gray-400">Member since 2021</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"As a new furry, I was nervous about joining communities. The Den made me feel welcome from day one!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="rules" class="py-20 bg-gray-800 bg-opacity-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Community Rules</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    To keep The Den a safe and welcoming space, we ask all members to follow these simple rules.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-900 bg-opacity-70 rounded-lg p-6 border-t-4 border-green-500">
+                    <h3 class="text-lg font-bold mb-3 text-green-400">1. Be Respectful</h3>
+                    <p class="text-gray-300">
+                        Treat all members with kindness and respect. No harassment, discrimination, or hate speech of any kind.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-lg p-6 border-t-4 border-yellow-500">
+                    <h3 class="text-lg font-bold mb-3 text-yellow-400">2. Keep it SFW</h3>
+                    <p class="text-gray-300">
+                        Keep all content appropriate for all ages. NSFW content must go in designated 18+ channels with proper tagging.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-lg p-6 border-t-4 border-red-500">
+                    <h3 class="text-lg font-bold mb-3 text-red-400">3. No Spam</h3>
+                    <p class="text-gray-300">
+                        Avoid excessive messaging, pinging, or self-promotion. Use appropriate channels for all content.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-lg p-6 border-t-4 border-purple-500">
+                    <h3 class="text-lg font-bold mb-3 text-purple-400">4. Respect Privacy</h3>
+                    <p class="text-gray-300">
+                        Do not share personal information about yourself or others without consent.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-lg p-6 border-t-4 border-blue-500">
+                    <h3 class="text-lg font-bold mb-3 text-blue-400">5. Follow Discord TOS</h3>
+                    <p class="text-gray-300">
+                        All Discord Community Guidelines must be followed at all times.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-lg p-6 border-t-4 border-pink-500">
+                    <h3 class="text-lg font-bold mb-3 text-pink-400">6. Have Fun!</h3>
+                    <p class="text-gray-300">
+                        Most importantly, relax, be yourself, and enjoy being part of our community!
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-400 italic">
+                    Breaking these rules may result in warnings, mutes, or bans at moderator discretion.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="py-20 bg-gray-800 bg-opacity-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Meet Our Staff</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Our dedicated team works hard to keep The Den a safe and welcoming space.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 text-center card-hover">
+                    <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-blue-500 mb-6 flex items-center justify-center text-white text-4xl font-bold">LW</div>
+                    <h3 class="text-xl font-bold mb-2">LunaWolf</h3>
+                    <p class="text-purple-400 font-medium mb-3">Server Owner</p>
+                    <p class="text-gray-300">Furry since 2012, artist and community builder</p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 text-center card-hover">
+                    <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 mb-6 flex items-center justify-center text-white text-4xl font-bold">KT</div>
+                    <h3 class="text-xl font-bold mb-2">KitsuneTail</h3>
+                    <p class="text-yellow-400 font-medium mb-3">Head Moderator</p>
+                    <p class="text-gray-300">Keeps the peace and organizes events</p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-8 text-center card-hover">
+                    <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-pink-500 to-red-500 mb-6 flex items-center justify-center text-white text-4xl font-bold">AP</div>
+                    <h3 class="text-xl font-bold mb-2">ArcticPaws</h3>
+                    <p class="text-pink-400 font-medium mb-3">Art Director</p>
+                    <p class="text-gray-300">Leads our art challenges and mentor program</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Frequently Asked Questions</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-6 shadow-lg">
+                    <button class="flex items-center justify-between w-full text-left">
+                        <h3 class="font-bold text-lg">Do I need to be a furry to join?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-4 text-gray-300 hidden">
+                        <p>While we're primarily a furry community, we welcome anyone who's respectful and interested in learning about the fandom!</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-6 shadow-lg">
+                    <button class="flex items-center justify-between w-full text-left">
+                        <h3 class="font-bold text-lg">Is there an age requirement?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-4 text-gray-300 hidden">
+                        <p>Our main server is 13+ to comply with Discord's TOS. We have a separate 18+ section for mature content.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 rounded-xl p-6 shadow-lg">
+                    <button class="flex items-center justify-between w-full text-left">
+                        <h3 class="font-bold text-lg">How do I get the Artist role?</h3>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-4 text-gray-300 hidden">
+                        <p>Share your artwork in #art-showcase and our art team will review it. Consistent posting earns you the Artist role!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section id="join" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900 to-pink-900 opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Join The Den Today</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Ready to become part of our furry family? Click below to join our Discord server!
+                </p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-gray-900 bg-opacity-70 rounded-xl p-8 shadow-xl border border-purple-500 border-opacity-30">
+                <div class="text-center">
+                    <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-4xl">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">The Den Discord Server</h3>
+                    <p class="text-gray-300 mb-8">
+                        Click the button below to join our community. After joining, please read the rules and introduce yourself in #welcome!
+                    </p>
+                    <a href="https://discord.gg/your-invite-link" target="_blank" class="px-8 py-4 rounded-full discord-btn text-white font-bold text-lg shadow-lg hover:shadow-xl transition duration-300 inline-flex items-center">
+                        <i class="fab fa-discord mr-3 text-2xl"></i> Join The Den
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-16 grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl text-purple-400 mb-4">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">2,500+ Members</h4>
+                    <p class="text-gray-400">From 30+ countries worldwide</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-4xl text-yellow-400 mb-4">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">150+ Daily Active</h4>
+                    <p class="text-gray-400">Average 5,000 messages weekly</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-4xl text-pink-400 mb-4">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">Weekly Events</h4>
+                    <p class="text-gray-400">Something fun always happening</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-90 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <i class="fas fa-paw text-purple-500 text-2xl mr-2"></i>
+                    <span class="text-xl font-bold gradient-text">The Den</span>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="https://twitter.com/theden_furry" class="text-gray-400 hover:text-purple-400 text-xl" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com/theden_furry" class="text-gray-400 hover:text-purple-400 text-xl" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com/thedenfurry" class="text-gray-400 hover:text-purple-400 text-xl" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://discord.gg/theden" class="text-gray-400 hover:text-purple-400 text-xl" target="_blank">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://furaffinity.net/groups/theden" class="text-gray-400 hover:text-purple-400 text-xl" target="_blank">
+                        <i class="fas fa-paw"></i>
+                    </a>
+                    <a href="https://t.me/theden_furry" class="text-gray-400 hover:text-purple-400 text-xl" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+                
+                <div class="text-gray-500 text-sm">
+                    &copy; 2023 The Den Furry Community. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = this.querySelector('i');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        const menuButton = document.getElementById('mobile-menu-button');
+                        const icon = menuButton.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+        
+        // Add fade-in animation to elements when they come into view
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    fadeInObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            element.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+            fadeInObserver.observe(element);
+        });
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                if (content.classList.contains('hidden')) {
+                    content.classList.remove('hidden');
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    content.classList.add('hidden');
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
